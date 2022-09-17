@@ -7,7 +7,7 @@ number = random.randint(-10, 10)
 #followed by a new line
 if number > 0 :
     print(f"{number} is positive")
-elif number == 0:
+elif number == 0 :
     print(f"{number} is zero")
-else:
+else :
     print(f"{number} is negative")
