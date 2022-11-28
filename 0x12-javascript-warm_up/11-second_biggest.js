@@ -1,5 +1,4 @@
 #!/usr/bin/node
-
 function second (myArray) {
   if (myArray.length === 2 || myArray.length === 3) { return (0); }
 
