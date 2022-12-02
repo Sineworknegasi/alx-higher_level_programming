@@ -1,29 +1,21 @@
 #!/usr/bin/python3
-
 """
-File: 11-model_state_insert.py
-Desc: This module contains a python script that adds the
-State object “Louisiana” to the database hbtn_0e_6_usa
-
-Author: Gizachew Bayness (Elec Crazy).
-Date Created: Oct 7 2022
+All states via SQLAlchemy
 """
-
-from model_state import Base, State
 from sys import argv
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-
+from model_state import Base, State
+from sqlalchemy import (create_engine)
+from sqlalchemy.orm import Session
 
 if __name__ == "__main__":
-    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'.format(
-        argv[1], argv[2], argv[3]), pool_pre_ping=True)
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'.
+                           format(argv[1], argv[2], argv[3]),
+                           pool_pre_ping=True)
+    Base.metadata.create_all(engine)
 
-    Session = sessionmaker(bind=engine)
-    session = Session()
-
-    louisiana = State(name="Louisiana")
-    session.add(louisiana)
+    session = Session(engine)
+    new_obj = State(name='Louisiana')
+    session.add(new_obj)
     session.commit()
-    session.refresh(louisiana)
-    print(louisiana.id)
+    print(new_obj.id)
+    session.close()
